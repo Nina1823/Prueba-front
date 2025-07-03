@@ -1,0 +1,25 @@
+<button class="btn btn-success mb-3" (click)="mostrarFormulario()">Agregar Empleado</button>
+
+<app-empleado-form *ngIf="formVisible" [empleado]="empleadoSeleccionado" (formCancelado)="cancelarFormulario()"
+    (formGuardado)="guardarEmpleado($event)">
+</app-empleado-form>
+
+<table class="table table-bordered table-striped" *ngIf="empleados.length > 0">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of empleados">
+            <td>{{ emp.nombre }}</td>
+            <td>{{ emp.correo }}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" (click)="editarEmpleado(emp)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="eliminarEmpleado(emp.id)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+<!-- src/app/components/empleado-form/empleado-form.component.html -->
+
+<form (ngSubmit)="guardar()" #form="ngForm" class="mb-4">
+    <input class="form-control mb-2" name="nombre" [(ngModel)]="empleado.nombre" placeholder="Nombre" required />
+    <input class="form-control mb-2" name="correo" [(ngModel)]="empleado.correo" type="email" placeholder="Correo"
+        required />
+    <input class="form-control mb-2" name="departamento" [(ngModel)]="empleado.departamento" placeholder="Departamento"
+        required />
+    <input class="form-control mb-2" name="telefono" [(ngModel)]="empleado.telefono" placeholder="Teléfono" />
+    <input class="form-control mb-2" name="fechaIngreso" [(ngModel)]="empleado.fechaIngreso" type="date" required />
+    <label>
+        <input class="form-check-input me-2" id="activo" [(ngModel)]="empleado.activo" name="activo" type="checkbox" />
+        Activo
+    </label>
+
+    <div class="mt-3">
+        <button class="btn btn-primary me-2" type="submit">Guardar</button>
+        <button class="btn btn-secondary" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+</form>
+  

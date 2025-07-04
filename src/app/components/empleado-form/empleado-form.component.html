@@ -1,10 +1,9 @@
-<!-- src/app/components/empleado-form/empleado-form.component.html -->
-
 <form (ngSubmit)="guardar()" #form="ngForm" class="mb-4">
     <input class="form-control mb-2" name="nombre" [(ngModel)]="empleado.nombre" placeholder="Nombre" required />
     <input class="form-control mb-2" name="correo" [(ngModel)]="empleado.correo" type="email" placeholder="Correo"
         required />
-    <input class="form-control mb-2" name="departamento" [(ngModel)]="empleado.departamento" placeholder="Departamento"
+        
+        <input class="form-control mb-2" name="departamento" [(ngModel)]="empleado.departamento" placeholder="Departamento"
         required />
     <input class="form-control mb-2" name="telefono" [(ngModel)]="empleado.telefono" placeholder="Teléfono" />
     <input class="form-control mb-2" name="fechaIngreso" [(ngModel)]="empleado.fechaIngreso" type="date" required />

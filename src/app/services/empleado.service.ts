@@ -1,11 +1,12 @@
-// empleados.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+    providedIn: 'root'
+})
 export class EmpleadosService {
-    private apiUrl = 'http://localhost:5000/api/empleados'; // cambia si tu backend usa otro puerto
+    private apiUrl = 'http://localhost:5247/api/Empleados';
 
     constructor(private http: HttpClient) { }
 
@@ -14,14 +15,20 @@ export class EmpleadosService {
     }
 
     crearEmpleado(empleado: any): Observable<any> {
-        return this.http.post(this.apiUrl, empleado);
+        return this.http.post(this.apiUrl, empleado, {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        });
     }
 
     actualizarEmpleado(empleado: any): Observable<any> {
-        return this.http.put(`${this.apiUrl}/${empleado.id}`, empleado);
+        return this.http.put(`${this.apiUrl}/${empleado.idEmpleado}`, empleado, {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        });
     }
 
-    eliminarEmpleado(id: any): Observable<any> {
-        return this.http.delete(`${this.apiUrl}/${id}`);
-    }
+    eliminarEmpleado(idEmpleado: number): Observable<any> {
+        const url = `${this.apiUrl}/${idEmpleado}`;
+        console.log(`DELETE → ${url}`);
+        return this.http.delete(url);
+      }
 }

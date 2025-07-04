@@ -1,5 +1,3 @@
-// src/app/app-routing.module.ts
-
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -11,7 +9,7 @@ export const routes: Routes = [
     {
         path: 'empleados',
         loadComponent: () =>
-            import('./pages/empleado-page.component').then(m => m.EmpleadoPageComponent)
+            import('./pages/empleado-page.component').then(m => m.EmpleadosComponent)
     },
     {
         path: '**',

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmpleadosService } from 'src/app/services/empleado.service';
-import { EmpleadoFormComponent } from '../../components/empleado-form/empleado-form.component';
+import { EmpleadosService } from '../services/empleado.service';
+import { EmpleadoFormComponent } from '../components/empleado-form/empleado-form.component';
 
 @Component({
     selector: 'app-empleados',
     standalone: true,
     imports: [CommonModule, EmpleadoFormComponent],
-    templateUrl: './empleados.component.html',
+    templateUrl: './empleado-page.component.html', 
 })
 export class EmpleadosComponent implements OnInit {
     empleados: any[] = [];
@@ -21,18 +21,18 @@ export class EmpleadosComponent implements OnInit {
     }
 
     cargarEmpleados(): void {
-        this.empleadosService.obtenerEmpleados().subscribe(data => {
+        this.empleadosService.obtenerEmpleados().subscribe((data) => {
             this.empleados = data;
         });
     }
 
-    mostrarFormulario() {
+    mostrarFormulario(): void {
         this.empleadoSeleccionado = null;
         this.formVisible = true;
     }
 
-    guardarEmpleado(empleado: any) {
-        if (empleado.id) {
+    guardarEmpleado(empleado: any): void {
+        if (empleado.idEmpleado) {
             this.empleadosService.actualizarEmpleado(empleado).subscribe(() => {
                 this.cargarEmpleados();
             });
@@ -45,18 +45,28 @@ export class EmpleadosComponent implements OnInit {
         this.formVisible = false;
     }
 
-    cancelarFormulario() {
+    cancelarFormulario(): void {
         this.formVisible = false;
     }
 
-    editarEmpleado(empleado: any) {
+    editarEmpleado(empleado: any): void {
         this.empleadoSeleccionado = { ...empleado };
         this.formVisible = true;
     }
 
-    eliminarEmpleado(id: number) {
-        this.empleadosService.eliminarEmpleado(id).subscribe(() => {
-            this.cargarEmpleados();
+    eliminarEmpleado(idEmpleado: number): void {
+        console.log('Intentando eliminar empleado con Id:', idEmpleado);
+
+        this.empleadosService.eliminarEmpleado(idEmpleado).subscribe({
+            next: () => {
+                console.log('Eliminación exitosa. Recargando lista…');
+                this.cargarEmpleados();
+            },
+            error: (err) => {
+                console.error(' Error al eliminar empleado:', err);
+                alert('No se pudo eliminar el empleado. Revisa la consola para más detalles.');
+            }
         });
     }
+  
 }
